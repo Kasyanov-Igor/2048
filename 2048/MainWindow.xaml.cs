@@ -10,6 +10,8 @@ namespace _2048
 		public MainWindow()
 		{
 			InitializeComponent();
+			GridGameField game = new GridGameField(this);
+
 		}
 	}
 }
