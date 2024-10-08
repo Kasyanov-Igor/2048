@@ -1,5 +1,6 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Input;
 using System.Windows.Media;
 
 namespace _2048
@@ -9,19 +10,15 @@ namespace _2048
 	/// </summary>
 	public partial class MainWindow : Window
 	{
+		private TextBox moveGameСount;
 		public MainWindow()
 		{
-
 			InitializeComponent();
-          
-            GridGameField game = new GridGameField(this);
-			game.RenderGameField();
-            game.RenderGameField();
-            game.RenderGameField();
-            game.RenderGameField();
 
+			GridGameField game = new GridGameField(this);
 
+			this.KeyUp += game.TextBox_Key;
+		}
 
-        }
 	}
 }
