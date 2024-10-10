@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Input;
 
 namespace _2048
 {
@@ -91,8 +89,10 @@ namespace _2048
 			return false;
 		}
 
-		public void PushUp()
+		public bool PushUp()
 		{
+			bool checkMove = false;
+
 			for (int i = 1; i < COUNT_ROWS; i++)
 			{
 				for (int j = 0; j < COUNT_COLLUMNS; j++)
@@ -113,6 +113,7 @@ namespace _2048
 								this._field[doubleI - 1, j] *= 2;
 								this._field[doubleI, j] = 0;
 								this._gameСount += this._field[doubleI - 1, j];
+								checkMove = true;
 								break;
 							}
 							else if (this._field[doubleI - 1, j] == 0)
@@ -120,16 +121,20 @@ namespace _2048
 								uint val = this._field[doubleI, j];
 								this._field[doubleI, j] = this._field[doubleI - 1, j];
 								this._field[doubleI - 1, j] = val;
+								checkMove = true;
 								doubleI--;
 							}
 						}
 					}
 				}
 			}
+			return checkMove;
 		}
 
-		public void PushDown()
+		public bool PushDown()
 		{
+			bool checkMove = false;
+
 			for (int i = 2; i >= 0; i--)
 			{
 				for (int j = 0; j < COUNT_ROWS; j++)
@@ -149,6 +154,7 @@ namespace _2048
 								this._field[doubleI + 1, j] *= 2;
 								this._field[doubleI, j] = 0;
 								this._gameСount += this._field[doubleI + 1, j];
+								checkMove = true;
 								break;
 							}
 							else if (this._field[doubleI + 1, j] == 0)
@@ -156,6 +162,7 @@ namespace _2048
 								uint val = this._field[doubleI, j];
 								this._field[doubleI, j] = this._field[doubleI + 1, j];
 								this._field[doubleI + 1, j] = val;
+								checkMove = true;
 								doubleI++;
 							}
 						}
@@ -164,11 +171,12 @@ namespace _2048
 
 
 			}
-
+			return checkMove;
 		}
 
-		public void PushRight()
+		public bool PushRight()
 		{
+			bool checkMove = false;
 
 			for (int i = 2; i >= 0; i--)
 			{
@@ -190,6 +198,7 @@ namespace _2048
 								this._field[j, doubleI + 1] *= 2;
 								this._field[j, doubleI] = 0;
 								this._gameСount += this._field[j, doubleI + 1];
+								checkMove = true;
 								break;
 							}
 							else if (this._field[j, doubleI + 1] == 0)
@@ -197,16 +206,20 @@ namespace _2048
 								uint val = this._field[j, doubleI];
 								this._field[j, doubleI] = this._field[j, doubleI + 1];
 								this._field[j, doubleI + 1] = val;
+								checkMove = true;
 								doubleI++;
 							}
 						}
 					}
 				}
 			}
+			return checkMove;
 		}
 
-		public void PushLeft()
+		public bool PushLeft()
 		{
+			bool checkMove = false;
+
 			for (int i = 1; i < COUNT_ROWS; i++)
 			{
 				for (int j = 0; j < COUNT_COLLUMNS; j++)
@@ -227,6 +240,7 @@ namespace _2048
 								this._field[j, doubleI - 1] *= 2;
 								this._field[j, doubleI] = 0;
 								this._gameСount += this._field[j, doubleI - 1];
+								checkMove = true;
 								break;
 							}
 							else if (this._field[j, doubleI - 1] == 0)
@@ -234,19 +248,41 @@ namespace _2048
 								uint val = this._field[j, doubleI];
 								this._field[j, doubleI] = this._field[j, doubleI - 1];
 								this._field[j, doubleI - 1] = val;
+								checkMove = true;
 								doubleI--;
 							}
 						}
 					}
 				}
 			}
+			return checkMove;
+		}
+
+		public bool IsEmptyCell()
+		{
+			for (int i = 0; i < COUNT_ROWS; i++)
+			{
+				for (int j = 0; j < COUNT_COLLUMNS; j++)
+				{
+					if (_field[i, j] == 0)
+					{
+						return true;
+					}
+				}
+			}
+			return false;
 		}
 
 		public uint[,] GetField()
 		{
 			return this._field;
-
 		}
+
+		public uint GetGameСount()
+		{
+			return this._gameСount;
+		}
+
 
 	}
 }

@@ -2,7 +2,6 @@
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
-using System.Windows.Media;
 
 namespace _2048
 {
@@ -23,7 +22,6 @@ namespace _2048
 				RowDefinitions.Add(new RowDefinition());
 				ColumnDefinitions.Add(new ColumnDefinition());
 			}
-
 
 			this._gameField.AddField();
 			this._gameField.AddField();
@@ -62,38 +60,61 @@ namespace _2048
 		}
 		public void TextBox_Key(object sender, KeyEventArgs e)
 		{
-			if (e.Key == Key.Left)
+			switch (e.Key)
 			{
-				this._gameField.PushLeft();
-				this.Drawing();
-			}
-			else if (e.Key == Key.Right)
-			{
-				this._gameField.PushRight();
-				this.Drawing();
-			}
-			else if (e.Key == Key.Up)
-			{
-				this._gameField.PushUp();
-				this.Drawing();
+				case Key.Left:
 
-			}
-			else if (e.Key == Key.Down)
-			{
-				this._gameField.PushDown();
-				this.Drawing();
+					if (this._gameField.PushLeft())
+					{
+						this._gameField.AddField();
+					}
+					this.Drawing();
+
+					break;
+
+				case Key.Right:
+
+					if (this._gameField.PushRight())
+					{
+						this._gameField.AddField();
+					}
+					this.Drawing();
+
+					break;
+
+				case Key.Up:
+
+					if (this._gameField.PushUp())
+					{
+						this._gameField.AddField();
+					}
+					this.Drawing();
+
+					break;
+
+				case Key.Down:
+
+					if (this._gameField.PushDown())
+					{
+						this._gameField.AddField();
+					}
+					this.Drawing();
+
+					break;
 			}
 		}
-
 
 		public void Drawing()
 		{
 			this.Children.Clear();
-			if (!this._gameField.AddField())
+
+			if (!this._gameField.IsEmptyCell())
 			{
 				MessageBox.Show("Game over");
 			}
+
 			this.RenderGameField();
+
 		}
 	}
 }
