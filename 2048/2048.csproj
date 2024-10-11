@@ -63,8 +63,9 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="GameScore.cs" />
+    <Compile Include="GridGame.cs" />
     <Compile Include="GridGameField.cs" />
+    <Compile Include="GridScore.cs" />
     <Compile Include="LogicGameField.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
