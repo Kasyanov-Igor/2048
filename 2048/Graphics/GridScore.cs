@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Media;
 
 namespace _2048
 {
@@ -14,6 +15,8 @@ namespace _2048
 			this.Render();
 
 			this.ShowGridLines = true;
+			this.Background = this.Background = new SolidColorBrush(Colors.LightGray);
+
 		}
 
 		public override void Render()

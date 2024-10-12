@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 
@@ -13,10 +14,19 @@ namespace _2048
 			this.HorizontalAlignment = System.Windows.HorizontalAlignment.Center;
 			this.VerticalAlignment = System.Windows.VerticalAlignment.Center;
 
-			//this.Width = 50;
+			this.Width = 100;
+			this.Height = 105;
+
 			//this.Width = a.Width / LogicGameField.COUNT_COLLUMNS; // ???
 
+			if (n == 0)
+			{
+				this.Text = " ";
+
+			}
+
 			this.Text = Convert.ToString(n);
+
 			GetColor(n);
 
 		}
@@ -25,6 +35,11 @@ namespace _2048
 		{
 			switch (number)
 			{
+				case 0:
+
+					this.Background = new SolidColorBrush(Colors.LightGray);
+					this.Text = " ";
+					break;
 				case 2:
 
 					this.Background = new SolidColorBrush(Color.FromArgb(24, 153, 0, 0));

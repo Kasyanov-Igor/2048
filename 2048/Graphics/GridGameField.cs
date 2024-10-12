@@ -1,5 +1,7 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Media;
+using System.Windows.Shapes;
 
 
 namespace _2048
@@ -20,10 +22,13 @@ namespace _2048
 			this.Height = parentElement.Height * 0.80;
 			this.Margin = new Thickness(20);
 
-			this.ShowGridLines = true;
+			//this.ShowGridLines = true;
+		   this.Background = this.Background = new SolidColorBrush(Colors.DarkGray);
+
 
 			this.Render();
 		}
+
 
 		public override void Render()
 		{
@@ -33,14 +38,29 @@ namespace _2048
 			{
 				for (int k = 0; k < LogicGameField.COUNT_COLLUMNS; ++k)
 				{
-					if (logicalGameField[i, k] != 0)
-					{
+					//if (logicalGameField[i, k] != 0)
+					//{
 						GraphicalTile textBox = new GraphicalTile(logicalGameField[i, k], this);
-                    
+					
 						Grid.SetRow(textBox, i);
 						Grid.SetColumn(textBox, k);
 						this.Children.Add(textBox);
-					}
+					//}
+				
+
+					//	Line line = new Line();
+					//line.StrokeThickness = 10;
+					//	//line.X1 = 0;
+					//	//line.Y1 = 0;
+					//	line.X2 = 500;
+					//	//line.Y2 = 0;
+
+					//	line.Stroke = new SolidColorBrush(Colors.Black);
+					//Grid.SetRow(line, i);
+					//Grid.SetColumn(line, k);
+
+					//this.Children.Add(line);
+
 				}
 			}
 		}
