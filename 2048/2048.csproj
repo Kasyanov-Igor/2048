@@ -63,10 +63,11 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="GridGame.cs" />
-    <Compile Include="GridGameField.cs" />
-    <Compile Include="GridScore.cs" />
-    <Compile Include="LogicGameField.cs" />
+    <Compile Include="Graphics\GraphicalTile .cs" />
+    <Compile Include="Graphics\GridGame.cs" />
+    <Compile Include="Graphics\GridGameField.cs" />
+    <Compile Include="Graphics\GridScore.cs" />
+    <Compile Include="Logic\LogicGameField.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
@@ -98,5 +99,6 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
