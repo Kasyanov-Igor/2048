@@ -5,7 +5,11 @@ namespace _2048
 {
 	public class GridGame : Grid
 	{
-		protected private LogicGameField _gameField;
+		public delegate void RenderScore();
+
+		public event RenderScore OnRenderScore;
+
+		public LogicGameField _gameField;
 
 		public GridGame()
 		{
@@ -26,8 +30,6 @@ namespace _2048
 					{
 						this._gameField.AddField();
 					}
-					this.Drawing();
-
 					break;
 
 				case Key.Right:
@@ -36,8 +38,6 @@ namespace _2048
 					{
 						this._gameField.AddField();
 					}
-					this.Drawing();
-
 					break;
 
 				case Key.Up:
@@ -46,8 +46,6 @@ namespace _2048
 					{
 						this._gameField.AddField();
 					}
-					this.Drawing();
-
 					break;
 
 				case Key.Down:
@@ -56,10 +54,10 @@ namespace _2048
 					{
 						this._gameField.AddField();
 					}
-					this.Drawing();
-
 					break;
 			}
+			this.Drawing();
+			this.OnRenderScore?.Invoke();
 		}
 	}
 }

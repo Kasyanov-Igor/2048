@@ -7,10 +7,14 @@ namespace _2048
 {
 	public class GridScore : GridGame
 	{
-		public GridScore() : base()
+		public GridScore(Window parentElement, LogicGameField parent) : base()
 		{
+			this._gameField = parent;
+
 			this.ColumnDefinitions.Add(new ColumnDefinition());
 			this.ColumnDefinitions.Add(new ColumnDefinition());
+
+			this.Height = parentElement.Width * 0.15;
 
 			this.Render();
 

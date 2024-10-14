@@ -1,46 +1,58 @@
 ﻿using System;
-using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
+using System.Windows;
 
 namespace _2048
 {
-	public class GraphicalTile : TextBlock
+	public class GraphicalRectangle : Border
 	{
-		//private const byte CELL_SIZE;
-		public GraphicalTile(uint n, Grid a)
+		public GraphicalRectangle(uint number, Grid a) 
 		{
-			this.HorizontalAlignment = System.Windows.HorizontalAlignment.Center;
-			this.VerticalAlignment = System.Windows.VerticalAlignment.Center;
+			this.Width = a.Width / LogicGameField.COUNT_COLLUMNS * 0.90;
+			this.Height = a.Height / LogicGameField.COUNT_COLLUMNS * 0.90;
 
-			this.Width = a.Width / LogicGameField.COUNT_COLLUMNS;
-			this.Height = a.Height / LogicGameField.COUNT_COLLUMNS;
+			//this.Margin = new Thickness();
 
-			this.Margin = new Thickness(10);
+			this.Background = Brushes.LightGray;
+			this.CornerRadius = new CornerRadius(20);
+			this.Padding = new Thickness(20);
 
-			this.FontSize = this.Height * 0.5;
+			this.HorizontalAlignment = HorizontalAlignment.Center;
+			this.VerticalAlignment = VerticalAlignment.Center;
 
-			if (n == 0)
+			if (number != 0)
 			{
-				this.Text = " ";
+				this.Child = new TextBlock
+				{
+					Text = Convert.ToString(number),
+					Foreground = Brushes.Black,
+					FontSize = this.Height * 0.3,
+					TextWrapping = TextWrapping.Wrap
+				};
 			}
+			else
+			{
+				this.Child = new TextBlock
+				{
+					Text = " ",
+					Foreground = Brushes.Black,
+					FontSize = this.Height * 0.5,
+					TextWrapping = TextWrapping.Wrap
+				};
+			}
+			//this.Width = 95;
+			//this.Height = 95;
 
-			this.Text = Convert.ToString(n);
-
-			GetColor(n);
+			this.GetColor(number);
 
 		}
+
 
 		public void GetColor(uint number)
 		{
 			switch (number)
 			{
-				case 0:
-
-					this.Background = new SolidColorBrush(Colors.LightGray);
-					this.Text = " ";
-
-					break;
 				case 2:
 
 					this.Background = new SolidColorBrush(Color.FromArgb(24, 153, 0, 0));
@@ -106,5 +118,7 @@ namespace _2048
 		}
 	}
 }
+
+
 
 
