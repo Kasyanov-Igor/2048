@@ -64,8 +64,6 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Graphics\GraphicalRectangle.cs" />
-    <Compile Include="Graphics\GraphicalTile .cs" />
-    <Compile Include="Graphics\GridGame.cs" />
     <Compile Include="Graphics\GridGameField.cs" />
     <Compile Include="Graphics\GridScore.cs" />
     <Compile Include="Logic\LogicGameField.cs" />

@@ -5,11 +5,12 @@ using System.Windows.Media;
 
 namespace _2048
 {
-	public class GridScore : GridGame
+	public class GridScore : Grid
 	{
-		public GridScore(Window parentElement, LogicGameField parent) : base()
+		public LogicGameField _gameField;
+		public GridScore(Window parentElement, LogicGameField gameField)
 		{
-			this._gameField = parent;
+			this._gameField = gameField; ;
 
 			this.ColumnDefinitions.Add(new ColumnDefinition());
 			this.ColumnDefinitions.Add(new ColumnDefinition());
@@ -23,7 +24,7 @@ namespace _2048
 
 		}
 
-		public override void Render()
+		public void Render()
 		{
 			for (byte i = 0; i < 2; i++)
 			{
@@ -46,7 +47,7 @@ namespace _2048
 
 		}
 
-		public override void Drawing()
+		public void Drawing()
 		{
 			this.Children.Clear();
 

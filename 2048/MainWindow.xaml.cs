@@ -8,9 +8,9 @@ namespace _2048
 	{
 		private StackPanel _gameWindow;
 
-		private GridGame _gameField;
+		private GridGameField _gameField;
 
-		private GridGame _gameScore;
+		private GridScore _gameScore;
 		public MainWindow()
 		{
 			InitializeComponent();
@@ -19,7 +19,7 @@ namespace _2048
 
 			this._gameField = new GridGameField(this);
 
-			this._gameScore = new GridScore(this, this._gameField._gameField);
+			this._gameScore = new GridScore(this, _gameField._gameField);
 
 			this._gameWindow = new StackPanel() { Orientation = Orientation.Vertical };
 
