@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
@@ -35,8 +36,23 @@ namespace _2048
 
 				if (i == 0)
 				{
-					textBox.Text = "RECORD - " + "2024";
-				}
+					string filePath = "./Score.txt";
+
+					string score = null;
+
+					if (File.Exists(filePath) == true)
+					{
+						using (StreamReader reader = new StreamReader(filePath))
+						{
+							score = reader.ReadLine();
+
+							reader.Close();
+						}
+					}
+					textBox.Text = "RECORD - " + score;
+
+
+					}
 				if (i == 1)
 				{
 					textBox.Text = "GLASSES - " + Convert.ToString(this._gameField.GetGameСount());

@@ -1,22 +1,35 @@
 ﻿using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows;
+using System;
 
 namespace _2048
 {
 	public class GraphicalRectangle : Border
 	{
+		private double fontSize;
 		public GraphicalRectangle(string number, Grid a)
 		{
 			this.Width = a.Width / LogicGameField.COUNT_COLLUMNS * 0.90;
 			this.Height = a.Height / LogicGameField.COUNT_COLLUMNS * 0.90;
 
 			this.Background = Brushes.LightGray;
+
 			this.CornerRadius = new CornerRadius(20);
 			this.Padding = new Thickness(20);
 
-			this.HorizontalAlignment = HorizontalAlignment.Center;
-			this.VerticalAlignment = VerticalAlignment.Center;
+			if (Convert.ToDouble(number) < 100)
+			{
+				fontSize = this.Height * 0.5;
+			}
+			else if (Convert.ToDouble(number) > 100 && Convert.ToDouble(number) < 1000)
+			{
+				fontSize = this.Height * 0.4;
+			}
+			else
+			{
+				fontSize = this.Height * 0.3;
+			}
 
 			if (number != "0")
 			{
@@ -24,8 +37,9 @@ namespace _2048
 				{
 					Text = number,
 					Foreground = Brushes.Black,
-					FontSize = this.Height * 0.5,
-					TextWrapping = TextWrapping.Wrap
+					FontSize = fontSize,
+					HorizontalAlignment = HorizontalAlignment.Center,
+					VerticalAlignment = VerticalAlignment.Center,
 				};
 			}
 			else
@@ -35,7 +49,6 @@ namespace _2048
 					Text = " ",
 					Foreground = Brushes.Black,
 					FontSize = this.Height * 0.5,
-					TextWrapping = TextWrapping.Wrap
 				};
 			}
 

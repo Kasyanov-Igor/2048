@@ -281,7 +281,5 @@ namespace _2048
 		{
 			return this._gameСount;
 		}
-
-
 	}
 }

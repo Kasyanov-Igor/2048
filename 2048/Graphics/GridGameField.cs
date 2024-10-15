@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -29,8 +30,8 @@ namespace _2048
 			this.Height = parentElement.Width * 0.9;
 			this.Width = parentElement.Width * 0.9;
 			this.Margin = new Thickness(10);
-			//this.ShowGridLines = true;
-		   this.Background = new SolidColorBrush(Colors.DarkGray);
+
+			this.Background = new SolidColorBrush(Colors.DarkGray);
 
 			this.Render();
 		}
@@ -43,7 +44,11 @@ namespace _2048
 			for (int i = 0; i < LogicGameField.COUNT_ROWS; i++)
 			{
 				for (int k = 0; k < LogicGameField.COUNT_COLLUMNS; ++k)
-				{				
+				{
+					if(logicalGameField[i, k] == 2048)
+					{
+						MessageBox.Show(" You win !!! ");
+					}
 					GraphicalRectangle textBox = new GraphicalRectangle(Convert.ToString(logicalGameField[i, k]), this);
 
 					Grid.SetRow(textBox, i);
@@ -94,6 +99,7 @@ namespace _2048
 			if (!this._gameField.IsEmptyCell() && !this._gameField.PushDown() && !this._gameField.PushUp() && !this._gameField.PushRight() && !this._gameField.PushLeft())
 			{
 				MessageBox.Show("Game over");
+				this.SaveData("Score");
 			}
 
 			this.OnRenderScore?.Invoke();
@@ -105,5 +111,47 @@ namespace _2048
 
 			this.Render();
 		}
+		private void SaveData(string fileName, string directory = "./", string format = ".txt")
+		{
+			string filePath = Path.Combine(directory, fileName + format);
+
+			string firstLine = null;
+
+			if (File.Exists(filePath) == false)
+			{
+				using (FileStream file = File.Create(filePath)) { }
+				using (StreamWriter writer = new StreamWriter(filePath))
+				{
+					writer.WriteLine("0");
+
+					writer.Close();
+				}
+			}
+
+			if (File.Exists(filePath)) //!< File opening check
+			{
+				using (StreamReader reader = new StreamReader(filePath))
+				{
+					firstLine = reader.ReadLine();
+
+					reader.Close();
+				}
+			}
+
+			if (Convert.ToUInt32(firstLine) < this._gameField.GetGameСount())
+			{
+				using (StreamWriter writer = new StreamWriter(filePath))
+				{
+
+					writer.WriteLine(this._gameField.GetGameСount());
+
+
+					writer.Close();
+				}
+			}
+		}
+
+
 	}
 }
+
