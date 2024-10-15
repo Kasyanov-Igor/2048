@@ -8,7 +8,7 @@ namespace _2048
 	public class GraphicalRectangle : Border
 	{
 		private double fontSize;
-		public GraphicalRectangle(string number, Grid a)
+		public GraphicalRectangle(uint number, Grid a)
 		{
 			this.Width = a.Width / LogicGameField.COUNT_COLLUMNS * 0.90;
 			this.Height = a.Height / LogicGameField.COUNT_COLLUMNS * 0.90;
@@ -18,11 +18,11 @@ namespace _2048
 			this.CornerRadius = new CornerRadius(20);
 			this.Padding = new Thickness(20);
 
-			if (Convert.ToDouble(number) < 100)
+			if (number < 100)
 			{
 				fontSize = this.Height * 0.5;
 			}
-			else if (Convert.ToDouble(number) > 100 && Convert.ToDouble(number) < 1000)
+			else if (number > 100 && number < 1000)
 			{
 				fontSize = this.Height * 0.4;
 			}
@@ -31,11 +31,11 @@ namespace _2048
 				fontSize = this.Height * 0.3;
 			}
 
-			if (number != "0")
+			if (number != 0)
 			{
 				this.Child = new TextBlock
 				{
-					Text = number,
+					Text = Convert.ToString(number),
 					Foreground = Brushes.Black,
 					FontSize = fontSize,
 					HorizontalAlignment = HorizontalAlignment.Center,
@@ -46,7 +46,7 @@ namespace _2048
 			{
 				this.Child = new TextBlock
 				{
-					Text = " ",
+					Text = String.Empty,
 					Foreground = Brushes.Black,
 					FontSize = this.Height * 0.5,
 				};
@@ -56,68 +56,67 @@ namespace _2048
 
 		}
 
-
-		public void GetColor(string number)
+		public void GetColor(uint number)
 		{
 			switch (number)
 			{
-				case "2":
+				case 2:
 
 					this.Background = new SolidColorBrush(Color.FromArgb(24, 153, 0, 0));
 
 					break;
 
-				case "4":
+				case 4:
 
 					this.Background = new SolidColorBrush(Color.FromArgb(72, 153, 0, 0));
 
 					break;
-				case "8":
+				case 8:
 
 					this.Background = new SolidColorBrush(Color.FromArgb(96, 153, 0, 0));
 
 					break;
 
-				case "16":
+				case 16:
 
 					this.Background = new SolidColorBrush(Color.FromArgb(120, 153, 0, 0));
 
 					break;
-				case "32":
+				case 32:
 
 					this.Background = new SolidColorBrush(Color.FromArgb(144, 153, 0, 0));
 
 					break;
 
-				case "64":
+				case 64:
 
 					this.Background = new SolidColorBrush(Color.FromArgb(168, 153, 0, 0));
 
 					break;
-				case "128":
+				case 128:
 
 					this.Background = new SolidColorBrush(Color.FromArgb(192, 153, 0, 0));
 
 					break;
 
-				case "256":
+				case 256:
 
 					this.Background = new SolidColorBrush(Color.FromArgb(216, 153, 0, 0));
 
 					break;
-				case "512":
+				case 512:
 
 					this.Background = new SolidColorBrush(Color.FromArgb(230, 204, 0, 0));
 
 					break;
 
-				case "1024":
+				case 1024:
 
 					this.Background = new SolidColorBrush(Color.FromArgb(240, 204, 0, 0));
 
 					break;
 
-				case "2048":
+				case 2048:
 
 					this.Background = new SolidColorBrush(Color.FromArgb(255, 204, 0, 0));
 

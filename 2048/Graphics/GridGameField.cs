@@ -45,11 +45,11 @@ namespace _2048
 			{
 				for (int k = 0; k < LogicGameField.COUNT_COLLUMNS; ++k)
 				{
-					if(logicalGameField[i, k] == 2048)
+					if (logicalGameField[i, k] == 2048)
 					{
 						MessageBox.Show(" You win !!! ");
 					}
-					GraphicalRectangle textBox = new GraphicalRectangle(Convert.ToString(logicalGameField[i, k]), this);
+					GraphicalRectangle textBox = new GraphicalRectangle(logicalGameField[i, k], this);
 
 					Grid.SetRow(textBox, i);
 					Grid.SetColumn(textBox, k);

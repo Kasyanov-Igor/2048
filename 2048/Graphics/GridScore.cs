@@ -11,7 +11,7 @@ namespace _2048
 		public LogicGameField _gameField;
 		public GridScore(Window parentElement, LogicGameField gameField)
 		{
-			this._gameField = gameField; ;
+			this._gameField = gameField;
 
 			this.ColumnDefinitions.Add(new ColumnDefinition());
 			this.ColumnDefinitions.Add(new ColumnDefinition());
@@ -38,7 +38,7 @@ namespace _2048
 				{
 					string filePath = "./Score.txt";
 
-					string score = null;
+					string score = "0";
 
 					if (File.Exists(filePath) == true)
 					{
@@ -49,6 +49,7 @@ namespace _2048
 							reader.Close();
 						}
 					}
+				
 					textBox.Text = "RECORD - " + score;
 
 

@@ -12,7 +12,6 @@ namespace _2048
 
 		private uint _gameСount = 0;
 
-		Random random = new Random();
 
 		public LogicGameField()
 		{
@@ -22,26 +21,29 @@ namespace _2048
 			{
 				for (int k = 0; k < COUNT_COLLUMNS; k++)
 				{
-					// Set empty cells
 					this._field[i, k] = 0;
 				}
 			}
 		}
 
+		/*! 
+		* @brief Creates 90 percent of the digit 2, 10 percent of the digit 4 and places it on the playing field.
+		*/
 		public bool AddField()
 		{
-			byte randRow = Convert.ToByte(random.Next(COUNT_ROWS));
-			byte randCollumn = Convert.ToByte(random.Next(COUNT_COLLUMNS));
+			Random random = new Random();
+			byte randRow = Convert.ToByte(random.Next(COUNT_ROWS)); //! random row number
+			byte randCollumn = Convert.ToByte(random.Next(COUNT_COLLUMNS)); //! random collum number
 
 			if (this._field[randRow, randCollumn] == 0)
 			{
 				if (random.Next(100) > 10)
 				{
-					this._field[randRow, randCollumn] = 2;
+					this._field[randRow, randCollumn] = 2; //! adding a number to a field
 				}
 				else
 				{
-					this._field[randRow, randCollumn] = 4;
+					this._field[randRow, randCollumn] = 4; //! adding a number to a field
 				}
 				return true;
 			}
@@ -55,11 +57,11 @@ namespace _2048
 						{
 							if (random.Next(100) > 10)
 							{
-								this._field[i, j] = 2;
+								this._field[i, j] = 2; //! adding a number to a field
 							}
 							else
 							{
-								this._field[i, j] = 4;
+								this._field[i, j] = 4; //! adding a number to a field
 							}
 							return true;
 						}
@@ -73,11 +75,11 @@ namespace _2048
 						{
 							if (random.Next(100) > 10)
 							{
-								this._field[i, j] = 2;
+								this._field[i, j] = 2; //! adding a number to a field
 							}
 							else
 							{
-								this._field[i, j] = 4;
+								this._field[i, j] = 4; //! adding a number to a field
 							}
 							return true;
 						}
@@ -88,6 +90,10 @@ namespace _2048
 			return false;
 		}
 
+		/*! 
+		* @brief Moves all pieces in an upward direction.
+		* @return True - when moving plates; False - plate movement is not possible.
+		*/
 		public bool PushUp()
 		{
 			bool checkMove = false;
@@ -130,6 +136,10 @@ namespace _2048
 			return checkMove;
 		}
 
+		/*! 
+		* @brief Moves all pieces in an doun direction.
+		* @return True - when moving plates; False - plate movement is not possible.
+		*/
 		public bool PushDown()
 		{
 			bool checkMove = false;
@@ -173,6 +183,10 @@ namespace _2048
 			return checkMove;
 		}
 
+		/*! 
+		* @brief Moves all pieces in an rith direction.
+		* @return True - when moving plates; False - plate movement is not possible.
+		*/
 		public bool PushRight()
 		{
 			bool checkMove = false;
@@ -215,6 +229,10 @@ namespace _2048
 			return checkMove;
 		}
 
+		/*! 
+		* @brief Moves all pieces in an left direction.
+		* @return True - when moving plates; False - plate movement is not possible.
+		*/
 		public bool PushLeft()
 		{
 			bool checkMove = false;
