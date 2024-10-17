@@ -4,14 +4,13 @@ namespace _2048
 {
 	public class LogicGameField
 	{
-		private readonly uint[,] _field;
+		private readonly uint[,] _field; //! Game field
 
-		public const byte COUNT_ROWS = 4;
+		public const byte COUNT_ROWS = 4; //! Count rows in game
 
-		public const byte COUNT_COLLUMNS = 4;
+		public const byte COUNT_COLLUMNS = 4; //! Count collums in game
 
-		private uint _gameСount = 0;
-
+		private uint _gameСount = 0; //! Count score game
 
 		public LogicGameField()
 		{
@@ -32,18 +31,18 @@ namespace _2048
 		public bool AddField()
 		{
 			Random random = new Random();
-			byte randRow = Convert.ToByte(random.Next(COUNT_ROWS)); //! random row number
-			byte randCollumn = Convert.ToByte(random.Next(COUNT_COLLUMNS)); //! random collum number
+			byte randRow = Convert.ToByte(random.Next(COUNT_ROWS)); //! Random row number
+			byte randCollumn = Convert.ToByte(random.Next(COUNT_COLLUMNS)); //! Random collum number
 
 			if (this._field[randRow, randCollumn] == 0)
 			{
 				if (random.Next(100) > 10)
 				{
-					this._field[randRow, randCollumn] = 2; //! adding a number to a field
+					this._field[randRow, randCollumn] = 2; //! Adding a number to a field
 				}
 				else
 				{
-					this._field[randRow, randCollumn] = 4; //! adding a number to a field
+					this._field[randRow, randCollumn] = 4; //! Adding a number to a field
 				}
 				return true;
 			}
@@ -57,11 +56,11 @@ namespace _2048
 						{
 							if (random.Next(100) > 10)
 							{
-								this._field[i, j] = 2; //! adding a number to a field
+								this._field[i, j] = 2; //! Adding a number to a field
 							}
 							else
 							{
-								this._field[i, j] = 4; //! adding a number to a field
+								this._field[i, j] = 4; //! Adding a number to a field
 							}
 							return true;
 						}
@@ -75,11 +74,11 @@ namespace _2048
 						{
 							if (random.Next(100) > 10)
 							{
-								this._field[i, j] = 2; //! adding a number to a field
+								this._field[i, j] = 2; //! Adding a number to a field
 							}
 							else
 							{
-								this._field[i, j] = 4; //! adding a number to a field
+								this._field[i, j] = 4; //! Adding a number to a field
 							}
 							return true;
 						}
@@ -112,7 +111,11 @@ namespace _2048
 							{
 								break;
 							}
-
+							/*! 
+							* @if The cells are the same.
+							*	 Add the figures and add them to the gameCount.
+							* @endif
+							*/
 							if (this._field[doubleI, j] == this._field[doubleI - 1, j])
 							{
 								this._field[doubleI - 1, j] *= 2;
@@ -121,6 +124,11 @@ namespace _2048
 								checkMove = true;
 								break;
 							}
+							/*! 
+						  * @else if The empty cell .
+						  *		Move the cells in the direction.
+						  * @endif
+						  */
 							else if (this._field[doubleI - 1, j] == 0)
 							{
 								uint val = this._field[doubleI, j];
@@ -158,6 +166,11 @@ namespace _2048
 							{
 								break;
 							}
+							/*! 
+							* @if The cells are the same.
+							*	 Add the figures and add them to the gameCount.
+							* @endif
+							*/
 							if (this._field[doubleI, j] == this._field[doubleI + 1, j])
 							{
 								this._field[doubleI + 1, j] *= 2;
@@ -166,6 +179,11 @@ namespace _2048
 								checkMove = true;
 								break;
 							}
+							/*! 
+							* @else if The empty cell .
+							*		Move the cells in the direction.
+							* @endif
+							*/
 							else if (this._field[doubleI + 1, j] == 0)
 							{
 								uint val = this._field[doubleI, j];
@@ -205,7 +223,11 @@ namespace _2048
 							{
 								break;
 							}
-
+							/*! 
+							* @if The cells are the same.
+							*	 Add the figures and add them to the gameCount.
+							* @endif
+							*/
 							if (this._field[j, doubleI] == this._field[j, doubleI + 1])
 							{
 								this._field[j, doubleI + 1] *= 2;
@@ -214,6 +236,11 @@ namespace _2048
 								checkMove = true;
 								break;
 							}
+							/*! 
+							* @else if The empty cell .
+							*		Move the cells in the direction.
+							* @endif
+							*/
 							else if (this._field[j, doubleI + 1] == 0)
 							{
 								uint val = this._field[j, doubleI];
@@ -251,7 +278,11 @@ namespace _2048
 							{
 								break;
 							}
-
+							/*! 
+							* @if The cells are the same.
+							*	 Add the figures and add them to the gameCount.
+							* @endif
+							*/
 							if (this._field[j, doubleI] == this._field[j, doubleI - 1])
 							{
 								this._field[j, doubleI - 1] *= 2;
@@ -260,6 +291,11 @@ namespace _2048
 								checkMove = true;
 								break;
 							}
+							/*! 
+							* @else if The empty cell .
+							*		Move the cells in the direction.
+							* @endif
+							*/
 							else if (this._field[j, doubleI - 1] == 0)
 							{
 								uint val = this._field[j, doubleI];
@@ -275,6 +311,10 @@ namespace _2048
 			return checkMove;
 		}
 
+		/*! 
+		* @brief Checking for empty cells.
+		* @return True - there are empty cells; False - there are no empty cells.
+		*/
 		public bool IsEmptyCell()
 		{
 			for (int i = 0; i < COUNT_ROWS; i++)
