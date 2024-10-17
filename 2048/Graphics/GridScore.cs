@@ -72,7 +72,6 @@ namespace _2048
 			this.Children.Clear();
 
 			this.Render();
-
 		}
 	}
 }

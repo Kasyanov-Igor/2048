@@ -1,5 +1,7 @@
 ﻿using System;
+using System.IO;
 using System.Windows;
+using System.Windows.Input;
 
 namespace _2048
 {
@@ -12,6 +14,14 @@ namespace _2048
 		public const byte COUNT_COLLUMNS = 4; //! Count collums in game
 
 		private uint _gameСount = 0; //! Count score game
+
+		public delegate void RenderScore();
+
+		public event RenderScore OnRenderScore;
+
+		public delegate void RenderGameFild();
+
+		public event RenderGameFild OnRenderGameFild;
 
 		public LogicGameField()
 		{
@@ -354,6 +364,96 @@ namespace _2048
 				}
 			}
 			return false;
+		}
+
+		/*! 
+		* @brief When the button is pressed, it implements the movement of all the plates in a certain direction.
+		*/
+		public void TextBox_Key(object sender, KeyEventArgs e)
+		{
+			switch (e.Key)
+			{
+				case Key.Left:
+
+					if (this.PushLeft())
+					{
+						this.AddField();
+					}
+					break;
+
+				case Key.Right:
+
+					if (this.PushRight())
+					{
+						this.AddField();
+					}
+					break;
+
+				case Key.Up:
+
+					if (this.PushUp())
+					{
+						this.AddField();
+					}
+					break;
+
+				case Key.Down:
+
+					if (this.PushDown())
+					{
+						this.AddField();
+					}
+					break;
+			}
+
+			if (this.GameWinAndOver())
+			{
+				this.SaveData("Score");
+			}
+
+			this.OnRenderGameFild?.Invoke();
+			this.OnRenderScore?.Invoke();
+		}
+
+		/*! 
+		* @brief Saving the best result of the game to a file, in the absence of a file creates it.
+		*/
+		private void SaveData(string fileName, string directory = "./", string format = ".txt")
+		{
+			string filePath = Path.Combine(directory, fileName + format);  //!< File path
+
+			string firstLine = null; //!< File contents
+
+			if (File.Exists(filePath) == false)
+			{
+				using (FileStream file = File.Create(filePath)) { }  //!< Create file
+				using (StreamWriter writer = new StreamWriter(filePath))
+				{
+					writer.WriteLine("0");
+
+					writer.Close();
+				}
+			}
+
+			if (File.Exists(filePath)) //!< File opening check
+			{
+				using (StreamReader reader = new StreamReader(filePath))
+				{
+					firstLine = reader.ReadLine(); //!< Reading file
+
+					reader.Close();
+				}
+			}
+
+			if (Convert.ToUInt32(firstLine) < this.GetGameСount())
+			{
+				using (StreamWriter writer = new StreamWriter(filePath))
+				{
+					writer.WriteLine(this.GetGameСount()); //!< Writer in file
+
+					writer.Close();
+				}
+			}
 		}
 
 		public uint[,] GetField()

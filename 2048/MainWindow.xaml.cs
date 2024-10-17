@@ -11,15 +11,20 @@ namespace _2048
 		private GridGameField _gameField;
 
 		private GridScore _gameScore;
+
+		private LogicGameField _logicGameField;
+
 		public MainWindow()
 		{
 			InitializeComponent();
 
-			this.Background = new SolidColorBrush(Colors.LightGray);
+            this._logicGameField = new LogicGameField();
 
-			this._gameField = new GridGameField(this);
+            this.Background = new SolidColorBrush(Colors.LightGray);
 
-			this._gameScore = new GridScore(this, _gameField._gameField);
+			this._gameField = new GridGameField(this, this._logicGameField);
+
+			this._gameScore = new GridScore(this, this._logicGameField);
 
 			this._gameWindow = new StackPanel() { Orientation = Orientation.Vertical };
 
@@ -29,9 +34,9 @@ namespace _2048
 
 			this.Content = _gameWindow;
 
-			this.KeyUp += _gameField.TextBox_Key;
-
-			this._gameField.OnRenderScore += this._gameScore.Drawing;
+			this.KeyUp += _logicGameField.TextBox_Key;
+			this._logicGameField.OnRenderScore += this._gameScore.Drawing;
+			this._logicGameField.OnRenderGameFild += this._gameField.Drawing;
 		}
 
 	}

@@ -1,22 +1,15 @@
-﻿using System;
-using System.IO;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Documents;
-using System.Windows.Input;
 using System.Windows.Media;
 
 namespace _2048
 {
 	public class GridGameField : Grid
 	{
-		public delegate void RenderScore();
-
-		public event RenderScore OnRenderScore;
 
 		public LogicGameField _gameField; //! An instance of the class responsible for the logic of the game
 
-		public GridGameField(Window parentElement)
+		public GridGameField(Window parentElement, LogicGameField gameField)
 		{
 			for (byte i = 0; i < LogicGameField.COUNT_ROWS; i++)
 			{
@@ -24,7 +17,7 @@ namespace _2048
 				this.ColumnDefinitions.Add(new ColumnDefinition()); //! Add colum to grid
 			}
 
-			_gameField = new LogicGameField();
+			_gameField = gameField;
 
 			this._gameField.AddField();
 			this._gameField.AddField();
@@ -61,56 +54,6 @@ namespace _2048
 		}
 
 		/*! 
-		* @brief When the button is pressed, it implements the movement of all the plates in a certain direction.
-		*/
-		public void TextBox_Key(object sender, KeyEventArgs e)
-		{
-			switch (e.Key)
-			{
-				case Key.Left:
-
-					if (this._gameField.PushLeft())
-					{
-						this._gameField.AddField();
-					}
-					break;
-
-				case Key.Right:
-
-					if (this._gameField.PushRight())
-					{
-						this._gameField.AddField();
-					}
-					break;
-
-				case Key.Up:
-
-					if (this._gameField.PushUp())
-					{
-						this._gameField.AddField();
-					}
-					break;
-
-				case Key.Down:
-
-					if (this._gameField.PushDown())
-					{
-						this._gameField.AddField();
-					}
-					break;
-			}
-
-			this.Drawing();
-
-			if (this._gameField.GameWinAndOver())
-			{
-				this.SaveData("Score");
-			}
-
-			this.OnRenderScore?.Invoke();
-		}
-
-		/*! 
 		* @brief Сlearing the previous drawing and drawing a new one.
 		*/
 		public void Drawing()
@@ -119,49 +62,6 @@ namespace _2048
 
 			this.Render();
 		}
-
-		/*! 
-		* @brief Saving the best result of the game to a file, in the absence of a file creates it.
-		*/
-		private void SaveData(string fileName, string directory = "./", string format = ".txt")
-		{
-			string filePath = Path.Combine(directory, fileName + format);  //!< File path
-
-			string firstLine = null; //!< File contents
-
-			if (File.Exists(filePath) == false)
-			{
-				using (FileStream file = File.Create(filePath)) { }  //!< Create file
-				using (StreamWriter writer = new StreamWriter(filePath))
-				{
-					writer.WriteLine("0");
-
-					writer.Close();
-				}
-			}
-
-			if (File.Exists(filePath)) //!< File opening check
-			{
-				using (StreamReader reader = new StreamReader(filePath))
-				{
-					firstLine = reader.ReadLine(); //!< Reading file
-
-					reader.Close();
-				}
-			}
-
-			if (Convert.ToUInt32(firstLine) < this._gameField.GetGameСount())
-			{
-				using (StreamWriter writer = new StreamWriter(filePath))
-				{
-					writer.WriteLine(this._gameField.GetGameСount()); //!< Writer in file
-
-					writer.Close();
-				}
-			}
-		}
-
-
 	}
 }
 
