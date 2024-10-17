@@ -2,6 +2,7 @@
 using System.IO;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 
@@ -49,10 +50,7 @@ namespace _2048
 			{
 				for (int k = 0; k < LogicGameField.COUNT_COLLUMNS; ++k)
 				{
-					if (logicalGameField[i, k] == 2048)
-					{
-						MessageBox.Show(" You win !!! ");
-					}
+
 					GraphicalRectangle textBox = new GraphicalRectangle(logicalGameField[i, k], this); //!< Class instance with text
 
 					Grid.SetRow(textBox, i); //! Placement instance in row to grid
@@ -101,11 +99,11 @@ namespace _2048
 					}
 					break;
 			}
+
 			this.Drawing();
 
-			if (!this._gameField.IsEmptyCell() && !this._gameField.PushDown() && !this._gameField.PushUp() && !this._gameField.PushRight() && !this._gameField.PushLeft())
+			if (this._gameField.GameWinAndOver())
 			{
-				MessageBox.Show("Game over");
 				this.SaveData("Score");
 			}
 

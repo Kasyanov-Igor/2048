@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Windows;
 
 namespace _2048
 {
@@ -323,6 +324,31 @@ namespace _2048
 				{
 					if (_field[i, j] == 0)
 					{
+						return true;
+					}
+				}
+			}
+			return false;
+		}
+
+		/*! 
+		* @brief Checking for wins or losses in the game.
+		* @return True - win or lose, end game; False - game on.
+		*/
+		public bool GameWinAndOver()
+		{
+			for (int i = 0; i < COUNT_ROWS; i++)
+			{
+				for (int j = 0; j < COUNT_COLLUMNS; j++)
+				{
+					if (_field[i, j] == 2048)
+					{
+						MessageBox.Show(" You win !!! ");
+						return true;
+					}
+					if (!this.IsEmptyCell() && !this.PushDown() && !this.PushUp() && !this.PushRight() && !this.PushLeft())
+					{
+						MessageBox.Show("Game over");
 						return true;
 					}
 				}
